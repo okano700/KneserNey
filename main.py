@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import nltk
 import numpy as np
 
-from KneserNey import KneserNeyBigram
-
+#from KneserNey import KneserNeyBigram
+import KneserNeyBigram
 
 def openReadText(fileName):
     oFile = open(fileName, "r")
