@@ -126,9 +126,10 @@ for w in y:
     paraPlotar.append((w[1]/1595700, kneser.probUni(w[0])))
     print(w[0])
 
-eixoX = np.arange(100)
-print(y)
-print(kneser.probUni("the"))
+#eixoX = np.arange(100)
+
+eixoX = list(freqUni.most_common(100))
+
 plt.plot(eixoX,paraPlotar)
 plt.grid(True)
 plt.show()
