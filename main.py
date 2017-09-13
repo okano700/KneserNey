@@ -94,13 +94,14 @@ for w in x:
     paraPlotar.append((w[1]/1278, kneser.prob(w[0])))
 
 print(kneser.prob(kneser.max()))
-"""
+
 eixoX = np.arange(100)
+
 
 plt.plot(eixoX,paraPlotar)
 plt.grid(True)
 plt.show()
-"""
+
 
 tok = list()
 for textos in textNegAndDeceptive:
@@ -123,12 +124,16 @@ y = freqUni.most_common(100)
 paraPlotar = list()
 
 for w in y:
-    paraPlotar.append((w[1]/1595700, kneser.probUni(w[0])))
+    paraPlotar.append((w[1]/159570, kneser.probUni(w[0])))
     print(w[0])
 
 eixoX = np.arange(100)
-print(y)
-print(kneser.probUni("the"))
+eixoXleg = list()
+for i,j in y:
+    eixoXleg.append(i)
+
+plt.xticks(eixoX,eixoXleg,rotation=90)
 plt.plot(eixoX,paraPlotar)
+
 plt.grid(True)
 plt.show()
