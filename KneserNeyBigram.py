@@ -8,9 +8,10 @@ class KneserNeyBi(probability.ProbDistI):
     """
     Kneser-Ney estimate of a probability distribution. This is a version of
     back-off that counts how likely an n-gram is provided the n-1-gram had
-    been seen in training. Extends the ProbDistI interface, requires a trigram
+    been seen in training. Extends the ProbDistI interface, requires a bigram
     FreqDist instance to train on. Optionally, a different from default discount
     value can be specified. The default discount is set to 0.75.
+
 
     """
     def __init__(self, freqdist, bins=None, discount=0.75):
@@ -35,10 +36,9 @@ class KneserNeyBi(probability.ProbDistI):
         self._cacheBi = {}
         self._cacheUni = {}
 
-        # internal bigram and trigram frequency distributions
+        # internal uni and bigram frequency distributions
         self._unigrams = defaultdict(int)
         self._bigrams = freqdist
-        #self._trigrams = freqdist
 
         # helper dictionaries used to calculate probabilities
         self._wordtypes_after = defaultdict(float)
@@ -46,7 +46,6 @@ class KneserNeyBi(probability.ProbDistI):
         for w0, w1 in freqdist:
             self._unigrams[(w0)] += freqdist[(w0, w1)]
             self._wordtypes_after[(w0)] += 1
-            #self._trigrams_contain[w1] += 1
             self._wordtypes_before[(w1)] += 1
 
 
@@ -60,7 +59,7 @@ class KneserNeyBi(probability.ProbDistI):
 
 
     def prob(self, bigram):
-        # sample must be a triple
+        # sample must be a double
         if len(bigram) != 2:
             raise ValueError('Expected an iterable with 2 members.')
         bigram = tuple(bigram)
