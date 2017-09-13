@@ -127,8 +127,9 @@ for w in y:
     print(w[0])
 
 #eixoX = np.arange(100)
-
-eixoX = list(freqUni.most_common(100))
+eixoX = list()
+for i in y:
+    eixoX.append(i)
 
 plt.plot(eixoX,paraPlotar)
 plt.grid(True)
