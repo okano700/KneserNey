@@ -1,12 +1,9 @@
 import os
 import string
-
 import matplotlib.pyplot as plt
 import nltk
 import numpy as np
-
-from KneserNey import KneserNeyBigram
-
+import KneserNeyBigram
 
 def openReadText(fileName):
     oFile = open(fileName, "r")
@@ -76,25 +73,62 @@ for textos in textNegAndDeceptive:
 for textos in textPosAndDeceptive:
     ngram.extend(get_trigrams(remPunctuation(textos.lower())))
 
+for textos in textPosAndTruth:
+    ngram.extend(get_trigrams(remPunctuation(textos.lower())))
+
+for textos in textNegAndTruth:
+    ngram.extend(get_trigrams(remPunctuation(textos.lower())))
+
 freq = nltk.FreqDist(ngram)
 
 kneser = KneserNeyBigram.KneserNeyBi(freq)
 for i in kneser.samples():
     print ("{0}\t\t{1}".format(i, kneser.prob(i)))
 
-x = freq.most_common(50)
+x = freq.most_common(100)
 
 print(x)
 paraPlotar = list()
 
 for w in x:
-    paraPlotar.append((w[1]/650, kneser.prob(w[0])))
+    paraPlotar.append((w[1]/1278, kneser.prob(w[0])))
 
 print(kneser.prob(kneser.max()))
-
-eixoX = np.arange(50)
+"""
+eixoX = np.arange(100)
 
 plt.plot(eixoX,paraPlotar)
 plt.grid(True)
 plt.show()
+"""
 
+tok = list()
+for textos in textNegAndDeceptive:
+    tok.extend(nltk.word_tokenize(remPunctuation(textos.lower())))
+
+for textos in textPosAndDeceptive:
+    tok.extend(nltk.word_tokenize(remPunctuation(textos.lower())))
+
+for textos in textPosAndTruth:
+    tok.extend(nltk.word_tokenize(remPunctuation(textos.lower())))
+
+for textos in textNegAndTruth:
+    tok.extend(nltk.word_tokenize(remPunctuation(textos.lower())))
+
+freqUni = nltk.FreqDist(tok)
+
+print(freqUni.max())
+y = freqUni.most_common(100)
+
+paraPlotar = list()
+
+for w in y:
+    paraPlotar.append((w[1]/1595700, kneser.probUni(w[0])))
+    print(w[0])
+
+eixoX = np.arange(100)
+print(y)
+print(kneser.probUni("the"))
+plt.plot(eixoX,paraPlotar)
+plt.grid(True)
+plt.show()
