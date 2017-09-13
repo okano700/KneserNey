@@ -135,5 +135,6 @@ for i,j in y:
 plt.xticks(eixoX,eixoXleg,rotation=90)
 plt.plot(eixoX,paraPlotar)
 
+
 plt.grid(True)
 plt.show()
