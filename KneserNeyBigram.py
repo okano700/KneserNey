@@ -23,6 +23,7 @@ class KneserNeyBi(probability.ProbDistI):
         :type bins: int or float
         :param discount: The discount applied when retrieving counts of
             bigrams
+
         :type discount: float (preferred, but can be set to int)
         """
 
