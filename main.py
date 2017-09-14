@@ -125,7 +125,6 @@ paraPlotar = list()
 
 for w in y:
     paraPlotar.append((w[1]/159570, kneser.probUni(w[0])))
-    print(w[0])
 
 eixoX = np.arange(100)
 eixoXleg = list()
