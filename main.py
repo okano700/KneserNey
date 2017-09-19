@@ -5,6 +5,7 @@ import nltk
 import numpy as np
 import KneserNeyBigram
 
+
 def openReadText(fileName):
     oFile = open(fileName, "r")
     return oFile.read()
@@ -86,6 +87,10 @@ for i in kneser.samples():
     print ("{0}\t\t{1}".format(i, kneser.prob(i)))
 
 x = freq.most_common(100)
+eixoX = np.arange(100)
+eixoXleg1 = list()
+for i, j in x:
+    eixoXleg1.append(i)
 
 print(x)
 paraPlotar = list()
@@ -97,7 +102,7 @@ print(kneser.prob(kneser.max()))
 
 eixoX = np.arange(100)
 
-
+plt.xticks(eixoX,eixoXleg1,rotation=90)
 plt.plot(eixoX,paraPlotar)
 plt.grid(True)
 plt.show()
@@ -125,9 +130,8 @@ paraPlotar = list()
 
 for w in y:
     paraPlotar.append((w[1]/159570, kneser.probUni(w[0])))
-    print(w[0])
 
-eixoX = np.arange(100)
+
 eixoXleg = list()
 for i,j in y:
     eixoXleg.append(i)
@@ -135,5 +139,18 @@ for i,j in y:
 plt.xticks(eixoX,eixoXleg,rotation=90)
 plt.plot(eixoX,paraPlotar)
 
+
 plt.grid(True)
 plt.show()
+
+pHist = list()
+for i,j in freqUni.most_common(freqUni.B()):
+    pHist.append(j)
+
+print(freqUni.B())
+print(freqUni.N())
+print(pHist)
+
+plt.hist(pHist,bins=1000)
+plt.show()
+print(pHist)
